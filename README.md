@@ -64,66 +64,150 @@ h2>MVP简介</h2>
     }
 }</code></pre> 
 <p style="text-align:start">presenter</p> 
-<pre><span style="color:#cc7832">public class </span>Presenter <span style="color:#cc7832">extends </span>BasePresenter&lt;IView&gt; {
+<pre class="hljs java"><span style="color:#cc7832"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> </span></span><span class="hljs-class"><span class="hljs-title">Presenter</span> </span><span style="color:#cc7832"><span class="hljs-class"><span class="hljs-keyword">extends</span> </span></span><span class="hljs-class"><span class="hljs-title">BasePresenter</span>&lt;<span class="hljs-title">IView</span>&gt; </span>{
 
-    ILoginSignIn <span style="color:#9876aa">iLoginSignIn</span>=<span style="color:#cc7832">new </span>ModelSignIn()<span style="color:#cc7832">;
+    ILoginSignIn <span style="color:#9876aa">iLoginSignIn</span>=<span style="color:#cc7832"><span class="hljs-keyword">new</span> </span>ModelSignIn()<span style="color:#cc7832">;
 </span>
-<span style="color:#cc7832">    public void </span><span style="color:#ffc66d">setSignIn</span>(String name<span style="color:#cc7832">,</span>String pwd)
-    {
-       <span style="color:#9876aa">iLoginSignIn</span>.<span style="color:#cc7833">onSignIn</span>(name<span style="color:#cc7832">, </span>pwd<span style="color:#cc7832">, new </span>ILoginSignIn.IOnSetListenter() {
+<span style="color:#cc7832">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">setSignIn</span></span></span><span class="hljs-function"><span class="hljs-params">(String name</span></span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-params">,</span></span></span><span class="hljs-function"><span class="hljs-params">String pwd)</span>
+    </span>{
+       <span style="color:#9876aa">iLoginSignIn</span>.<span style="color:#cc7833">onSignIn</span>(name<span style="color:#cc7832">, </span>pwd<span style="color:#cc7832">, <span class="hljs-keyword">new</span> </span>ILoginSignIn.IOnSetListenter() {
            IView <span style="color:#9876aa">view</span>=<span style="color:#cc7833">getView</span>()<span style="color:#cc7832">;
-</span><span style="color:#cc7832">           </span><span style="color:#bbb529">@Override
-</span><span style="color:#bbb529">           </span><span style="color:#cc7832">public void </span><span style="color:#ffc66d">onError</span>(String error) {
-               <span style="color:#cc7832">if</span>(<span style="color:#9876aa">view</span>!=<span style="color:#cc7832">null</span>){
+</span><span style="color:#cc7832">           </span><span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">           </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onError</span></span></span><span class="hljs-function"><span class="hljs-params">(String error)</span> </span>{
+               <span style="color:#cc7832"><span class="hljs-keyword">if</span></span>(<span style="color:#9876aa">view</span>!=<span style="color:#cc7832"><span class="hljs-keyword">null</span></span>){
                     <span style="color:#9876aa">view</span>.<span style="color:#cc7833">showToast</span>(error)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">               </span>}
            }
 
-           <span style="color:#bbb529">@Override
-</span><span style="color:#bbb529">           </span><span style="color:#cc7832">public void </span><span style="color:#ffc66d">onSccess</span>(String repsonce) {
-               <span style="color:#cc7832">if</span>(<span style="color:#9876aa">view</span>!=<span style="color:#cc7832">null</span>){
+           <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">           </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onSccess</span></span></span><span class="hljs-function"><span class="hljs-params">(String repsonce)</span> </span>{
+               <span style="color:#cc7832"><span class="hljs-keyword">if</span></span>(<span style="color:#9876aa">view</span>!=<span style="color:#cc7832"><span class="hljs-keyword">null</span></span>){
                    <span style="color:#9876aa">view</span>.<span style="color:#cc7833">showToast</span>(repsonce)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">               </span>}
            }
        })<span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>}
-}</pre> 
-<p style="text-align:start">activity</p> 
-<pre><span style="color:#cc7832">public class </span>MainActivity <span style="color:#cc7832">extends </span>BaseActivity&lt;IView<span style="color:#cc7832">,</span>Presenter&gt; <span style="color:#cc7832">implements </span>IView<span style="color:#cc7832">,</span>View.OnClickListener{
+}</pre>
+<p style="text-align:start">activity</p>
+<pre class="hljs java"><span style="color:#cc7832"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> </span></span><span class="hljs-class"><span class="hljs-title">MainActivity</span> </span><span style="color:#cc7832"><span class="hljs-class"><span class="hljs-keyword">extends</span> </span></span><span class="hljs-class"><span class="hljs-title">BaseActivity</span>&lt;<span class="hljs-title">IView</span></span><span style="color:#cc7832"><span class="hljs-class">,</span></span><span class="hljs-class"><span class="hljs-title">Presenter</span>&gt; </span><span style="color:#cc7832"><span class="hljs-class"><span class="hljs-keyword">implements</span> </span></span><span class="hljs-class"><span class="hljs-title">IView</span></span><span style="color:#cc7832"><span class="hljs-class">,</span></span><span class="hljs-class"><span class="hljs-title">View</span>.<span class="hljs-title">OnClickListener</span></span>{
 
     EditText <span style="color:#9876aa">username</span><span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>EditText <span style="color:#9876aa">password</span><span style="color:#cc7832">;
-</span><span style="color:#cc7832">    </span><span style="color:#bbb529">@Override
-</span><span style="color:#bbb529">    </span><span style="color:#cc7832">protected void </span><span style="color:#ffc66d">onCreate</span>(Bundle savedInstanceState) {
-        <span style="color:#cc7832">super</span>.<span style="color:#cc7833">onCreate</span>(savedInstanceState)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span><span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onCreate</span></span></span><span class="hljs-function"><span class="hljs-params">(Bundle savedInstanceState)</span> </span>{
+        <span style="color:#cc7832"><span class="hljs-keyword">super</span></span>.<span style="color:#cc7833">onCreate</span>(savedInstanceState)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">        </span><span style="color:#cc7833">setContentView</span>(R.layout.<em>activity_main</em>)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">        </span><span style="color:#cc7833">initView</span>()<span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>}
 
-    <span style="color:#cc7832">private void </span><span style="color:#ffc66d">initView</span>()
-    {
+    <span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">initView</span></span></span><span class="hljs-function"><span class="hljs-params">()</span>
+    </span>{
         <span style="color:#9876aa">username</span>=(EditText)<span style="color:#cc7833">findViewById</span>(R.id.<em>username</em>)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">        </span><span style="color:#9876aa">password</span>=(EditText)<span style="color:#cc7833">findViewById</span>(R.id.<em>password</em>)<span style="color:#cc7832">;
-</span><span style="color:#cc7832">        </span><span style="color:#cc7833">findViewById</span>(R.id.<em>login</em>).<span style="color:#cc7833">setOnClickListener</span>(<span style="color:#cc7832">this</span>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span><span style="color:#cc7833">findViewById</span>(R.id.<em>login</em>).<span style="color:#cc7833">setOnClickListener</span>(<span style="color:#cc7832"><span class="hljs-keyword">this</span></span>)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>}
 
-    <span style="color:#bbb529">@Override
-</span><span style="color:#bbb529">    </span><span style="color:#cc7832">public </span>Presenter <span style="color:#ffc66d">createPersenter</span>() {
-        <span style="color:#cc7832">return new </span>Presenter()<span style="color:#cc7832">;
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> </span></span><span class="hljs-function">Presenter </span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">createPersenter</span></span></span><span class="hljs-function"><span class="hljs-params">()</span> </span>{
+        <span style="color:#cc7832"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> </span>Presenter()<span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>}
 
-    <span style="color:#bbb529">@Override
-</span><span style="color:#bbb529">    </span><span style="color:#cc7832">public void </span><span style="color:#ffc66d">onClick</span>(View v) {
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onClick</span></span></span><span class="hljs-function"><span class="hljs-params">(View v)</span> </span>{
         String name=<span style="color:#9876aa">username</span>.<span style="color:#cc7833">getText</span>().<span style="color:#cc7833">toString</span>()<span style="color:#cc7832">;
 </span><span style="color:#cc7832">        </span>String pwd=<span style="color:#9876aa">password</span>.<span style="color:#cc7833">getText</span>().<span style="color:#cc7833">toString</span>()<span style="color:#cc7832">;
 </span><span style="color:#cc7832">        </span><span style="color:#9876aa">p</span>.<span style="color:#cc7833">setSignIn</span>(name<span style="color:#cc7832">,</span>pwd)<span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>}
 
-    <span style="color:#bbb529">@Override
-</span><span style="color:#bbb529">    </span><span style="color:#cc7832">public void </span><span style="color:#ffc66d">showToast</span>(String msg) {
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">showToast</span></span></span><span class="hljs-function"><span class="hljs-params">(String msg)</span> </span>{
         Toast.<em>makeText</em>(<span style="color:#cc7833">getApplicationContext</span>()<span style="color:#cc7832">,</span>msg<span style="color:#cc7832">,</span>Toast.<em>LENGTH_LONG</em>).<span style="color:#cc7833">show</span>()<span style="color:#cc7832">;
 </span><span style="color:#cc7832">    </span>}
-}</pre> 
+}</pre>
+<p>网络请求</p>
+<pre class="hljs java"><span style="color:#cc7832"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> </span></span><span class="hljs-class"><span class="hljs-title">MainActivity</span> </span><span style="color:#cc7832"><span class="hljs-class"><span class="hljs-keyword">extends</span> </span></span><span class="hljs-class"><span class="hljs-title">BaseActivity</span>&lt;<span class="hljs-title">IView</span></span><span style="color:#cc7832"><span class="hljs-class">,</span></span><span class="hljs-class"><span class="hljs-title">Presenter</span>&gt; </span><span style="color:#cc7832"><span class="hljs-class"><span class="hljs-keyword">implements</span> </span></span><span class="hljs-class"><span class="hljs-title">IView</span></span><span style="color:#cc7832"><span class="hljs-class">,</span></span><span class="hljs-class"><span class="hljs-title">View</span>.<span class="hljs-title">OnClickListener</span> </span>{
+
+    <span style="color:#cc7832"><span class="hljs-keyword">private</span> </span>TextView <span style="color:#9876aa">textView</span><span style="color:#cc7832">;
+</span><span style="color:#cc7832">    <span class="hljs-keyword">private</span> </span>ProgessDialog <span style="color:#9876aa">dialog</span><span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span><span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onCreate</span></span></span><span class="hljs-function"><span class="hljs-params">(Bundle savedInstanceState)</span> </span>{
+        <span style="color:#cc7832"><span class="hljs-keyword">super</span></span>.<span style="color:#cc7833">onCreate</span>(savedInstanceState)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span><span style="color:#cc7833">setContentView</span>(R.layout.<em>activity_main</em>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span><span style="color:#cc7833">initView</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">initView</span></span></span><span class="hljs-function"><span class="hljs-params">()</span></span>{
+        <span style="color:#9876aa">textView</span>=(TextView) <span style="color:#cc7833">findViewById</span>(R.id.<em>text</em>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span><span style="color:#cc7833">findViewById</span>(R.id.<em>btn</em>).<span style="color:#cc7833">setOnClickListener</span>(<span style="color:#cc7832"><span class="hljs-keyword">this</span></span>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onLoadContributorStart</span></span></span><span class="hljs-function"><span class="hljs-params">()</span> </span>{
+        <span style="color:#cc7833">showProgress</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onLoadContribtorComplete</span></span></span><span class="hljs-function"><span class="hljs-params">(String topContributor)</span> </span>{
+       <span style="color:#808080"><span class="hljs-comment">//得到主线程的数据</span>
+</span><span style="color:#808080">        </span>Message msg=<span style="color:#cc7832"><span class="hljs-keyword">new</span> </span><span style="color:#cc7833">Message</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span>msg.<span style="color:#9876aa">what</span>=<span style="color:#6897bb"><span class="hljs-number">1</span></span><span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span>msg.<span style="color:#9876aa">obj</span>=topContributor<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span><span style="color:#9876aa">handler</span>.<span style="color:#cc7833">sendMessage</span>(msg)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+    Handler <span style="color:#9876aa">handler</span>=<span style="color:#cc7832"><span class="hljs-keyword">new</span> </span>Handler(){
+        <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">        </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">handleMessage</span></span></span><span class="hljs-function"><span class="hljs-params">(Message msg)</span> </span>{
+            <span style="color:#cc7832"><span class="hljs-keyword">super</span></span>.<span style="color:#cc7833">handleMessage</span>(msg)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">            </span><span style="color:#cc7833">dismissProgress</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">            </span><span style="color:#9876aa">textView</span>.<span style="color:#cc7833">setText</span>(msg.<span style="color:#9876aa">obj</span>.<span style="color:#cc7833">toString</span>())<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span>}
+    }<span style="color:#cc7832">;
+</span>
+<span style="color:#cc7832">    </span><span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onClick</span></span></span><span class="hljs-function"><span class="hljs-params">(View v)</span> </span>{
+        <span style="color:#9876aa">p</span>.<span style="color:#cc7833">setGet</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> </span></span><span class="hljs-function">Presenter </span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">createPresenter</span></span></span><span class="hljs-function"><span class="hljs-params">()</span> </span>{
+        <span style="color:#cc7832"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> </span>Presenter()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onNetWork</span></span></span><span class="hljs-function"><span class="hljs-params">()</span> </span>{
+        Toast.<em>makeText</em>(<span style="color:#cc7833">getApplicationContext</span>()<span style="color:#cc7832">,</span><span style="color:#6a8759"><span class="hljs-string">&quot;网络未连接&quot;</span></span><span style="color:#cc7832">,</span>Toast.<em>LENGTH_LONG</em>).<span style="color:#cc7833">show</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#bbb529"><span class="hljs-meta">@Override</span>
+</span><span style="color:#bbb529">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">onError</span></span></span><span class="hljs-function"><span class="hljs-params">()</span> </span>{
+        Toast.<em>makeText</em>(<span style="color:#cc7833">getApplicationContext</span>()<span style="color:#cc7832">,</span><span style="color:#6a8759"><span class="hljs-string">&quot;数据加载失败&quot;</span></span><span style="color:#cc7832">,</span>Toast.<em>LENGTH_LONG</em>).<span style="color:#cc7833">show</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span><span style="color:#9876aa">textView</span>.<span style="color:#cc7833">setText</span>(<span style="color:#6a8759"><span class="hljs-string">&quot;&quot;</span></span>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#629755"><span class="hljs-comment">/***
+</span></span><span style="color:#629755"><span class="hljs-comment">     * 启动
+</span></span><span style="color:#629755"><span class="hljs-comment">     */</span>
+</span><span style="color:#629755">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">showProgress</span></span></span><span class="hljs-function"><span class="hljs-params">()</span>
+    </span>{
+        <span style="color:#cc7832"><span class="hljs-keyword">if</span></span>(<span style="color:#9876aa">dialog</span>==<span style="color:#cc7832"><span class="hljs-keyword">null</span></span>)
+        {
+            <span style="color:#9876aa">dialog</span>=<span style="color:#cc7832"><span class="hljs-keyword">new</span> </span><span style="color:#cc7833">ProgessDialog</span>(MainActivity.<span style="color:#cc7832"><span class="hljs-keyword">this</span></span>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span>}
+        <span style="color:#9876aa">dialog</span>.<span style="color:#cc7833">showMessage</span>(<span style="color:#6a8759"><span class="hljs-string">&quot;正在加载&quot;</span></span>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+
+    <span style="color:#629755"><span class="hljs-comment">/***
+</span></span><span style="color:#629755"><span class="hljs-comment">     * 关闭
+</span></span><span style="color:#629755"><span class="hljs-comment">     */</span>
+</span><span style="color:#629755">    </span><span style="color:#cc7832"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span>  </span></span><span style="color:#ffc66d"><span class="hljs-function"><span class="hljs-title">dismissProgress</span></span></span><span class="hljs-function"><span class="hljs-params">()</span>
+    </span>{
+        <span style="color:#cc7832"><span class="hljs-keyword">if</span></span>(<span style="color:#9876aa">dialog</span>==<span style="color:#cc7832"><span class="hljs-keyword">null</span></span>)
+        {
+            <span style="color:#9876aa">dialog</span>=<span style="color:#cc7832"><span class="hljs-keyword">new</span> </span><span style="color:#cc7833">ProgessDialog</span>(<span style="color:#cc7832"><span class="hljs-keyword">this</span></span>)<span style="color:#cc7832">;
+</span><span style="color:#cc7832">        </span>}
+        <span style="color:#9876aa">dialog</span>.<span style="color:#cc7833">dismiss</span>()<span style="color:#cc7832">;
+</span><span style="color:#cc7832">    </span>}
+}</pre>
 <p>网络请求</p> 
 <pre><span style="color:#cc7832">public class </span>MainActivity <span style="color:#cc7832">extends </span>BaseActivity&lt;IView<span style="color:#cc7832">,</span>Presenter&gt; <span style="color:#cc7832">implements </span>IView<span style="color:#cc7832">,</span>View.OnClickListener {
 
