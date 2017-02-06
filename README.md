@@ -1,5 +1,5 @@
 # Android之MVP模式实现登录和网络数据加载
-h2>MVP简介</h2> 
+<h2>MVP简介</h2> 
 <p style="text-align:start">相信大家对 MVC 都是比较熟悉了：M-Model-模型、V-View-视图、C-Controller-控制器，MVP作为MVC的演化版本，也是作为用户界面（用户层）的实现模式，那么类似的MVP所对应的意义：M-Model-模型、V-View-视图、P-Presenter-表示器。</p> 
 <p style="text-align:start">MVC详见博客： <a href="https://my.oschina.net/zhangqie/blog/831622" rel="nofollow">Android之MVC模式的使用 </a></p> 
 <span id="OSC_h3_2"></span>
@@ -63,156 +63,153 @@ h2>MVP简介</h2>
         }
     }
 }</code></pre> 
-<p>presenter</p>
-<div class="cnblogs_code">
-<pre><span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span> Presenter <span style="color: #0000ff">extends</span> BasePresenter&lt;IView&gt;<span style="color: #000000"> {
+<p style="text-align:start">presenter</p> 
+<pre><code class="language-java">public class Presenter extends BasePresenter&lt;IView&gt; {
 
-    ILoginSignIn iLoginSignIn</span>=<span style="color: #0000ff">new</span><span style="color: #000000"> ModelSignIn();
+    ILoginSignIn iLoginSignIn=new ModelSignIn();
 
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> setSignIn(String name,String pwd)
+    public void setSignIn(String name,String pwd)
     {
-       iLoginSignIn.onSignIn(name, pwd, </span><span style="color: #0000ff">new</span><span style="color: #000000"> ILoginSignIn.IOnSetListenter() {
-           IView view</span>=<span style="color: #000000">getView();
+       iLoginSignIn.onSignIn(name, pwd, new ILoginSignIn.IOnSetListenter() {
+           IView view=getView();
            @Override
-           </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onError(String error) {
-               </span><span style="color: #0000ff">if</span>(view!=<span style="color: #0000ff">null</span><span style="color: #000000">){
+           public void onError(String error) {
+               if(view!=null){
                     view.showToast(error);
                }
            }
 
            @Override
-           </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onSccess(String repsonce) {
-               </span><span style="color: #0000ff">if</span>(view!=<span style="color: #0000ff">null</span><span style="color: #000000">){
+           public void onSccess(String repsonce) {
+               if(view!=null){
                    view.showToast(repsonce);
                }
            }
        });
     }
-}</span></pre>
-</div>
-<p>activity</p>
-<div class="cnblogs_code">
-<pre><span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span> MainActivity <span style="color: #0000ff">extends</span> BaseActivity&lt;IView,Presenter&gt; <span style="color: #0000ff">implements</span><span style="color: #000000"> IView,View.OnClickListener{
+}
+</code></pre> 
+<p style="text-align:start">activity</p> 
+<pre><code class="language-javascript">public class MainActivity extends BaseActivity&lt;IView,Presenter&gt; implements IView,View.OnClickListener{
 
     EditText username;
     EditText password;
     @Override
-    </span><span style="color: #0000ff">protected</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onCreate(Bundle savedInstanceState) {
-        </span><span style="color: #0000ff">super</span><span style="color: #000000">.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
     }
 
-    </span><span style="color: #0000ff">private</span> <span style="color: #0000ff">void</span><span style="color: #000000"> initView()
+    private void initView()
     {
-        username</span>=<span style="color: #000000">(EditText)findViewById(R.id.username);
-        password</span>=<span style="color: #000000">(EditText)findViewById(R.id.password);
-        findViewById(R.id.login).setOnClickListener(</span><span style="color: #0000ff">this</span><span style="color: #000000">);
+        username=(EditText)findViewById(R.id.username);
+        password=(EditText)findViewById(R.id.password);
+        findViewById(R.id.login).setOnClickListener(this);
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Presenter createPersenter() {
-        </span><span style="color: #0000ff">return</span> <span style="color: #0000ff">new</span><span style="color: #000000"> Presenter();
+    public Presenter createPersenter() {
+        return new Presenter();
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onClick(View v) {
-        String name</span>=<span style="color: #000000">username.getText().toString();
-        String pwd</span>=<span style="color: #000000">password.getText().toString();
+    public void onClick(View v) {
+        String name=username.getText().toString();
+        String pwd=password.getText().toString();
         p.setSignIn(name,pwd);
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> showToast(String msg) {
+    public void showToast(String msg) {
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
     }
-}</span></pre>
-</div>
-<p>网络请求</p>
-<div class="cnblogs_code">
-<pre><span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span> MainActivity <span style="color: #0000ff">extends</span> BaseActivity&lt;IView,Presenter&gt; <span style="color: #0000ff">implements</span><span style="color: #000000"> IView,View.OnClickListener {
+}</code></pre> 
+<p>网络请求</p> 
+<pre><code class="language-java">public class MainActivity extends BaseActivity&lt;IView,Presenter&gt; implements IView,View.OnClickListener {
 
-    </span><span style="color: #0000ff">private</span><span style="color: #000000"> TextView textView;
-    </span><span style="color: #0000ff">private</span><span style="color: #000000"> ProgessDialog dialog;
+    private TextView textView;
+    private ProgessDialog dialog;
     @Override
-    </span><span style="color: #0000ff">protected</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onCreate(Bundle savedInstanceState) {
-        </span><span style="color: #0000ff">super</span><span style="color: #000000">.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
     }
 
-    </span><span style="color: #0000ff">private</span> <span style="color: #0000ff">void</span><span style="color: #000000"> initView(){
-        textView</span>=<span style="color: #000000">(TextView) findViewById(R.id.text);
-        findViewById(R.id.btn).setOnClickListener(</span><span style="color: #0000ff">this</span><span style="color: #000000">);
+    private void initView(){
+        textView=(TextView) findViewById(R.id.text);
+        findViewById(R.id.btn).setOnClickListener(this);
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onLoadContributorStart() {
+    public void onLoadContributorStart() {
         showProgress();
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onLoadContribtorComplete(String topContributor) {
-       </span><span style="color: #008000">//</span><span style="color: #008000">得到主线程的数据</span>
-        Message msg=<span style="color: #0000ff">new</span><span style="color: #000000"> Message();
-        msg.what</span>=1<span style="color: #000000">;
-        msg.obj</span>=<span style="color: #000000">topContributor;
+    public void onLoadContribtorComplete(String topContributor) {
+       //得到主线程的数据
+        Message msg=new Message();
+        msg.what=1;
+        msg.obj=topContributor;
         handler.sendMessage(msg);
     }
-    Handler handler</span>=<span style="color: #0000ff">new</span><span style="color: #000000"> Handler(){
+    Handler handler=new Handler(){
         @Override
-        </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> handleMessage(Message msg) {
-            </span><span style="color: #0000ff">super</span><span style="color: #000000">.handleMessage(msg);
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             dismissProgress();
             textView.setText(msg.obj.toString());
         }
     };
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onClick(View v) {
+    public void onClick(View v) {
         p.setGet();
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Presenter createPresenter() {
-        </span><span style="color: #0000ff">return</span> <span style="color: #0000ff">new</span><span style="color: #000000"> Presenter();
+    public Presenter createPresenter() {
+        return new Presenter();
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onNetWork() {
-        Toast.makeText(getApplicationContext(),</span>"网络未连接"<span style="color: #000000">,Toast.LENGTH_LONG).show();
+    public void onNetWork() {
+        Toast.makeText(getApplicationContext(),"网络未连接",Toast.LENGTH_LONG).show();
     }
 
     @Override
-    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> onError() {
-        Toast.makeText(getApplicationContext(),</span>"数据加载失败"<span style="color: #000000">,Toast.LENGTH_LONG).show();
-        textView.setText(</span>""<span style="color: #000000">);
+    public void onError() {
+        Toast.makeText(getApplicationContext(),"数据加载失败",Toast.LENGTH_LONG).show();
+        textView.setText("");
     }
 
-    </span><span style="color: #008000">/**</span><span style="color: #008000">*
+    /***
      * 启动
-     </span><span style="color: #008000">*/</span>
-    <span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> showProgress()
+     */
+    public void showProgress()
     {
-        </span><span style="color: #0000ff">if</span>(dialog==<span style="color: #0000ff">null</span><span style="color: #000000">)
+        if(dialog==null)
         {
-            dialog</span>=<span style="color: #0000ff">new</span> ProgessDialog(MainActivity.<span style="color: #0000ff">this</span><span style="color: #000000">);
+            dialog=new ProgessDialog(MainActivity.this);
         }
-        dialog.showMessage(</span>"正在加载"<span style="color: #000000">);
+        dialog.showMessage("正在加载");
     }
 
-    </span><span style="color: #008000">/**</span><span style="color: #008000">*
+    /***
      * 关闭
-     </span><span style="color: #008000">*/</span>
-    <span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000">  dismissProgress()
+     */
+    public void  dismissProgress()
     {
-        </span><span style="color: #0000ff">if</span>(dialog==<span style="color: #0000ff">null</span><span style="color: #000000">)
+        if(dialog==null)
         {
-            dialog</span>=<span style="color: #0000ff">new</span> ProgessDialog(<span style="color: #0000ff">this</span><span style="color: #000000">);
+            dialog=new ProgessDialog(this);
         }
         dialog.dismiss();
     }
-}</span></pre>
-</div>
+}</code></pre> 
 <p>不要忘记在AndroidManifest.xml加权限哦！</p> 
 <pre><code class="language-html">&lt;uses-permission android:name="android.permission.INTERNET"/&gt;</code></pre> 
+<span id="OSC_h3_5"></span>
+<h3><span style="color:#B22222"><strong>由于代码太多，完整代码未给出，源码直接下载即可</strong></span></h3> 
