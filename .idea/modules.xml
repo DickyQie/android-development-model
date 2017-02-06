@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MvpProject.iml" filepath="$PROJECT_DIR$/MvpProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/http/http.iml" filepath="$PROJECT_DIR$/http/http.iml" />
+      <module fileurl="file://$PROJECT_DIR$/httpmvp/httpmvp.iml" filepath="$PROJECT_DIR$/httpmvp/httpmvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mvphttp/mvphttp.iml" filepath="$PROJECT_DIR$/mvphttp/mvphttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/myapplication/myapplication.iml" />
+    </modules>
+  </component>
+</project>
